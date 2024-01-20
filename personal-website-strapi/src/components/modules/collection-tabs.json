@@ -1,0 +1,41 @@
+{
+  "collectionName": "components_modules_collection_tabs",
+  "info": {
+    "displayName": "CollectionTabs",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "centerTitle": {
+      "type": "boolean"
+    },
+    "limitItems": {
+      "type": "biginteger"
+    },
+    "itemsPerRow": {
+      "type": "biginteger"
+    },
+    "itemsPerRowInTablet": {
+      "type": "biginteger"
+    },
+    "itemsPerRowInMobile": {
+      "type": "biginteger"
+    },
+    "stacks": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::stack.stack"
+    },
+    "projects": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::project.project"
+    },
+    "description": {
+      "type": "text"
+    }
+  }
+}
