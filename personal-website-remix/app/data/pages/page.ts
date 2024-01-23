@@ -2,7 +2,7 @@ import { MODULES } from "../modules";
 
 export const PAGE_QUERY = (slug: string) => {
   return `
-    query Page {
+    query Page ($limit: Int) {
       pages(filters: {slug: {eq: "${slug}"}}, pagination: {}, sort: [], publicationState: LIVE) {
         data {
           id

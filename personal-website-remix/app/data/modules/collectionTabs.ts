@@ -7,7 +7,12 @@ export const MODULE_COLLECTION_TABS = `
     itemsPerRowInTablet
     itemsPerRowInMobile
     description
-    projects {
+    projects (
+      filters: {}
+      pagination: {limit: 30}
+      sort: []
+      publicationState: LIVE
+    ) {
       data {
         id
         attributes {
@@ -32,7 +37,12 @@ export const MODULE_COLLECTION_TABS = `
         }
       }
     }
-    stacks {
+    stacks (
+      filters: {}
+      pagination: {limit: $limit}
+      sort: []
+      publicationState: LIVE
+    ) {
       data {
         id
         attributes {

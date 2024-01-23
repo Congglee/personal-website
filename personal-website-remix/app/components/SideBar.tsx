@@ -18,7 +18,7 @@ type SideBarProps = {
   menu: Menu[];
 };
 
-const SideBar = ({ menu }: SideBarProps) => {
+export function SideBar({ menu }: SideBarProps) {
   return (
     <div className="hidden md:flex md:w-64 md:flex-col md:fixed md:inset-y-0">
       <div className="flex-1 flex flex-col min-h-0 border-r-[1.5px]">
@@ -74,28 +74,29 @@ const SideBar = ({ menu }: SideBarProps) => {
       </div>
     </div>
   );
-};
+}
 
-const ProfileLink = () => (
-  <Link to="/about" className="flex items-center">
-    <div>
-      <Avatar>
-        <AvatarImage src={Profile} />
-        <AvatarFallback>CN</AvatarFallback>
-      </Avatar>
-    </div>
-    <div className="ml-3">
-      <p className="text-sm font-medium">Công Lê</p>
-      <p className="text-xs font-medium text-primary group-hover:text-primary/85">
-        View profile
-      </p>
-    </div>
-  </Link>
-);
+function ProfileLink() {
+  return (
+    <Link to="/about" className="flex items-center">
+      <div>
+        <Avatar>
+          <AvatarImage src={Profile} />
+          <AvatarFallback>CN</AvatarFallback>
+        </Avatar>
+      </div>
+      <div className="ml-3">
+        <p className="text-sm font-medium">Công Lê</p>
+        <p className="text-xs font-medium text-primary group-hover:text-primary/85">
+          View profile
+        </p>
+      </div>
+    </Link>
+  );
+}
 
-const ThemeToggleButton = () => {
+export function ThemeToggleButton() {
   const [theme, setTheme] = useTheme();
-
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -119,6 +120,4 @@ const ThemeToggleButton = () => {
       </DropdownMenuContent>
     </DropdownMenu>
   );
-};
-
-export default SideBar;
+}

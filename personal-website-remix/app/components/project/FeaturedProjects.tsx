@@ -34,7 +34,10 @@ export function FeaturedProjects({
                     {project.attributes.description}
                   </p>
                 </div>
-                <Link to="/project/1">
+                <Link
+                  to={`/projects/${project.attributes.slug}`}
+                  className="w-full"
+                >
                   <Button
                     variant="ghost"
                     className="bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2 w-full lg:w-fit mt-5 lg:mt-0"

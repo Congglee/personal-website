@@ -1,7 +1,7 @@
 import { MODULES } from "../modules";
 
 export const HOME_PAGE = `
-  query HomePage {
+  query HomePage($limit: Int) {
   homePage(publicationState: LIVE) {
     data {
       id

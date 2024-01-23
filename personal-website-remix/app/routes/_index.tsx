@@ -10,13 +10,13 @@ import { HomePage } from "~/lib/type";
 
 export const meta: MetaFunction = () => {
   return [
-    { title: "New Remix App" },
+    { title: "Cong Le" },
     { name: "description", content: "Welcome to Remix!" },
   ];
 };
 
 export async function loader({ params, context }: LoaderFunctionArgs) {
-  const res: any = await strapi.request(HOME_PAGE);
+  const res: any = await strapi.request(HOME_PAGE, { limit: 6 });
 
   const homeData: HomePage = res?.homePage?.data?.attributes;
 
