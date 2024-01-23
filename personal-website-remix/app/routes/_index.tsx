@@ -51,7 +51,7 @@ export default function Index() {
         </p>
 
         <div className="gap-x-5 flex mt-5">
-          <Link to="/about">
+          <Link to="/about" prefetch="intent">
             <Button
               variant="ghost"
               className="bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2"
@@ -61,7 +61,7 @@ export default function Index() {
             </Button>
           </Link>
 
-          <Link to="/about">
+          <Link to="/projects" prefetch="intent">
             <Button
               variant="ghost"
               className="bg-secondary text-secondary-foreground hover:bg-secondary/80 h-10 px-4 py-2"

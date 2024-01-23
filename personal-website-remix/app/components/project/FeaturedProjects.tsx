@@ -19,7 +19,10 @@ export function FeaturedProjects({
             project?.attributes?.image?.data?.attributes
           );
           return (
-            <div className="rounded-lg border bg-card text-card-foreground shadow-sm w-full">
+            <div
+              className="rounded-lg border bg-card text-card-foreground shadow-sm w-full"
+              key={project.id}
+            >
               <img
                 src={projectImage?.url}
                 alt="project thumbnail"
@@ -36,7 +39,8 @@ export function FeaturedProjects({
                 </div>
                 <Link
                   to={`/projects/${project.attributes.slug}`}
-                  className="w-full"
+                  className="w-full lg:w-auto"
+                  prefetch="intent"
                 >
                   <Button
                     variant="ghost"

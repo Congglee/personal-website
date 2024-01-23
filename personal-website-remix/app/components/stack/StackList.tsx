@@ -28,7 +28,10 @@ export function StackList({
         )}
       >
         {stacks?.data?.map((stack: any) => (
-          <div className="flex items-center gap-x-4 p-3 hover:bg-primary/10 rounded-lg">
+          <div
+            className="flex items-center gap-x-4 p-3 hover:bg-primary/10 rounded-lg"
+            key={stack.id}
+          >
             <img
               src={strapiImage(stack?.attributes?.image?.data?.attributes)?.url}
               alt=""
@@ -46,7 +49,7 @@ export function StackList({
 
       {!stackPage && (
         <div className="flex items-center p-6 pt-0 w-full">
-          <Link to="/stack" className="w-full">
+          <Link to="/stack" className="w-full" prefetch="intent">
             <Button className="border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2 w-full">
               View More
             </Button>
