@@ -1,12 +1,16 @@
 {
   "name": "personal-website-strapi",
-  "private": true,
   "version": "0.1.0",
+  "private": true,
   "description": "A Strapi application",
+  "license": "MIT",
+  "author": {
+    "name": "A Strapi developer"
+  },
   "scripts": {
+    "build": "strapi build",
     "develop": "strapi develop",
     "start": "strapi start",
-    "build": "strapi build",
     "strapi": "strapi"
   },
   "dependencies": {
@@ -23,18 +27,14 @@
     "strapi-plugin-import-export-entries": "^1.23.1",
     "styled-components": "5.3.3"
   },
-  "author": {
-    "name": "A Strapi developer"
-  },
-  "strapi": {
-    "uuid": "e38ac927-9957-4c09-9345-5eda5d0a568e"
+  "engines": {
+    "node": ">=18.18.0 <19.0.0",
+    "npm": ">=6.0.0"
   },
   "overrides": {
     "graphql": "16.8.1"
   },
-  "engines": {
-    "node": ">=18.0.0 <=20.x.x",
-    "npm": ">=6.0.0"
-  },
-  "license": "MIT"
+  "strapi": {
+    "uuid": "e38ac927-9957-4c09-9345-5eda5d0a568e"
+  }
 }
