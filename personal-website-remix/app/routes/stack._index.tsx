@@ -1,13 +1,10 @@
-import {
-  ActionFunctionArgs,
-  LoaderFunctionArgs,
-  MetaFunction,
-  json,
-} from "@remix-run/node";
+import { RichText } from "@graphcms/rich-text-react-renderer";
+import { LoaderFunctionArgs, MetaFunction, json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { StackList } from "~/components/stack";
-import { PAGE_QUERY } from "~/data/pages/page";
-import { strapi } from "~/lib/strapi.server";
+import { PAGE_QUERY } from "~/data/hygraph/pages/page";
+import { hygraph } from "~/lib/hygraph.server";
+import { CollectionTab, PageData } from "~/lib/type";
 
 export const meta: MetaFunction = () => {
   return [
@@ -17,29 +14,26 @@ export const meta: MetaFunction = () => {
 };
 
 export async function loader({ request, context }: LoaderFunctionArgs) {
-  const res: any = await strapi.request(PAGE_QUERY("stack"), {
-    limit: 50,
-  });
+  const res: PageData = await hygraph.request(PAGE_QUERY("stack"));
+  const stackPage = res?.page;
 
-  const page = res?.pages?.data[0]?.attributes;
-
-  if (!page) {
+  if (!stackPage) {
     throw new Response(null, { status: 404 });
   }
 
-  return json({ page });
+  return json({ stackPage });
 }
 
 export default function Stack() {
-  const { page } = useLoaderData<typeof loader>();
+  const { stackPage } = useLoaderData<typeof loader>();
 
-  const { heading, description, modules } = page;
+  const { heading, description, modules } = stackPage;
 
   const developmentModule = modules?.find(
-    (module: any) => module.title === "Development"
+    (module: CollectionTab) => module.title === "Development"
   );
   const productivityModule = modules?.find(
-    (module: any) => module.title === "Productivity"
+    (module: CollectionTab) => module.title === "Productivity"
   );
 
   return (
@@ -47,7 +41,9 @@ export default function Stack() {
       <h1 className="scroll-m-20 text-4xl font-semibold  tracking-normal lg:text-5xl">
         {heading}
       </h1>
-      <p className="leading-7 text-muted-foreground mt-4">{description}</p>
+      <div className="leading-7 text-muted-foreground mt-4">
+        <RichText content={description.raw} />
+      </div>
 
       {developmentModule && (
         <>

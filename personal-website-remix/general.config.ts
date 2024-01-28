@@ -1,3 +1,3 @@
 export default {
-  strapiDomain: "https://personal-website-strapi-app.onrender.com",
+  strapiDomain: "http://127.0.0.1:1337",
 };

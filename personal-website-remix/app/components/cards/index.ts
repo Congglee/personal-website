@@ -1,2 +1,2 @@
-export { FeatureProjectCard } from "./FeatureProjectCard";
+export { ProjectCard } from "./ProjectCard";
 export { StackCard } from "./StackCard";

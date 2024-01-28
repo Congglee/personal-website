@@ -17,9 +17,10 @@ import {
 } from "remix-themes";
 import stylesheet from "~/globals.css";
 import { Layout } from "./components/Layout";
-import { MENU_QUERY } from "./data/menu";
+import { MENU_QUERY } from "./data/hygraph/menu";
 import { themeSessionResolver } from "./lib/session.server";
-import { strapi } from "./lib/strapi.server";
+import { hygraph } from "./lib/hygraph.server";
+import { Menus } from "./lib/type";
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: stylesheet },
@@ -27,9 +28,9 @@ export const links: LinksFunction = () => [
 
 export async function loader({ request }: LoaderFunctionArgs) {
   const { getTheme } = await themeSessionResolver(request);
-  const menu: any = await strapi.request(MENU_QUERY);
 
-  const menuData = menu?.menus?.data;
+  const menu: Menus = await hygraph.request(MENU_QUERY);
+  const menuData = menu?.menus;
 
   return defer({
     theme: getTheme(),

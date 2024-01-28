@@ -1,5 +1,5 @@
 import { Link } from "@remix-run/react";
-import { strapiImage } from "~/lib/utils";
+import { Project } from "~/lib/type";
 import { Button } from "../ui/button";
 
 export function FeaturedProjects({
@@ -14,31 +14,26 @@ export function FeaturedProjects({
         {title}
       </label>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 w-full mt-3">
-        {projects?.data?.map((project: any) => {
-          const projectImage = strapiImage(
-            project?.attributes?.image?.data?.attributes
-          );
+        {projects?.map((project: Project) => {
           return (
             <div
               className="rounded-lg border bg-card text-card-foreground shadow-sm w-full"
               key={project.id}
             >
               <img
-                src={projectImage?.url}
+                src={project.image?.url}
                 alt="project thumbnail"
                 className="rounded-t-lg lg:h-[300px] w-full object-cover"
               />
               <div className="items-center p-6 pt-0 flex gap-x-5 flex-col lg:flex-row justify-between mt-5">
                 <div className="flex flex-col">
-                  <h2 className="font-bold line-clamp-1">
-                    {project.attributes.title}
-                  </h2>
+                  <h2 className="font-bold line-clamp-1">{project.title}</h2>
                   <p className="text-muted-foreground line-clamp-2">
-                    {project.attributes.description}
+                    {project.description}
                   </p>
                 </div>
                 <Link
-                  to={`/projects/${project.attributes.slug}`}
+                  to={`/projects/${project.slug}`}
                   className="w-full lg:w-auto"
                   prefetch="intent"
                 >

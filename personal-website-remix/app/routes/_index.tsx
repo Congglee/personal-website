@@ -1,12 +1,13 @@
+import { RichText } from "@graphcms/rich-text-react-renderer";
 import type { LoaderFunctionArgs, MetaFunction } from "@remix-run/node";
 import { Link, defer, useLoaderData } from "@remix-run/react";
 import { PersonStanding, Projector } from "lucide-react";
 import { FeaturedProjects } from "~/components/project";
 import { StackList } from "~/components/stack";
 import { Button } from "~/components/ui/button";
-import { HOME_PAGE } from "~/data/pages/home";
-import { strapi } from "~/lib/strapi.server";
-import { HomePage } from "~/lib/type";
+import { HOME_PAGE } from "~/data/hygraph/pages/home";
+import { hygraph } from "~/lib/hygraph.server";
+import { PageData } from "~/lib/type";
 
 export const meta: MetaFunction = () => {
   return [
@@ -16,9 +17,8 @@ export const meta: MetaFunction = () => {
 };
 
 export async function loader({ params, context }: LoaderFunctionArgs) {
-  const res: any = await strapi.request(HOME_PAGE, { limit: 6 });
-
-  const homeData: HomePage = res?.homePage?.data?.attributes;
+  const res: PageData = await hygraph.request(HOME_PAGE);
+  const homeData = res?.page;
 
   return defer({ homeData });
 }
@@ -44,11 +44,11 @@ export default function Index() {
     <>
       <div className="">
         <h1 className="scroll-m-20 text-4xl font-semibold tracking-normal lg:text-5xl">
-          {homeData.title}
+          {homeData.heading}
         </h1>
-        <p className="leading-7 text-muted-foreground mt-4">
-          {homeData.description}
-        </p>
+        <div className="leading-7 text-muted-foreground mt-4">
+          <RichText content={homeData.description.raw} />
+        </div>
 
         <div className="gap-x-5 flex mt-5">
           <Link to="/about" prefetch="intent">

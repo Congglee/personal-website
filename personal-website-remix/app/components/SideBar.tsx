@@ -14,11 +14,7 @@ import {
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
 
-type SideBarProps = {
-  menu: Menu[];
-};
-
-export function SideBar({ menu }: SideBarProps) {
+export function SideBar({ menu }: { menu: Menu[] }) {
   return (
     <div className="hidden md:flex md:w-64 md:flex-col md:fixed md:inset-y-0">
       <div className="flex-1 flex flex-col min-h-0 border-r-[1.5px]">
@@ -33,38 +29,35 @@ export function SideBar({ menu }: SideBarProps) {
           </div>
           <div className="shrink-0 bg-border h-[1px] w-full"></div>
           <nav className="mt-5 flex-1 px-2 space-y-1">
-            {(
-              menu.sort(
-                (a: any, b: any) =>
-                  a.attributes.position - b.attributes.position
-              ) || []
-            ).map((item: Menu, index: number) => {
-              const menuLink = item.attributes.link;
-              const menuIcon = menuIcons[index].icon;
-              return (
-                <Fragment key={item.id}>
-                  <NavLink
-                    prefetch="intent"
-                    className={({ isActive }) =>
-                      isActive
-                        ? "bg-muted group flex items-center px-2 py-2 text-sm font-medium rounded-md"
-                        : "hover:bg-muted hover:bg-opacity-75 group flex items-center px-2 py-2 text-sm font-medium rounded-md"
-                    }
-                    to={menuLink ? menuLink : "/"}
-                    target={item.attributes.openNewTab ? "_blank" : "_self"}
-                  >
-                    {menuIcon}
-                    {item.attributes.title}
-                  </NavLink>
+            {(menu.sort((a: any, b: any) => a.position - b.position) || []).map(
+              (item: Menu, index: number) => {
+                const menuLink = item.link;
+                const menuIcon = menuIcons[index].icon;
+                return (
+                  <Fragment key={item.id}>
+                    <NavLink
+                      prefetch="intent"
+                      className={({ isActive }) =>
+                        isActive
+                          ? "bg-muted group flex items-center px-2 py-2 text-sm font-medium rounded-md"
+                          : "hover:bg-muted hover:bg-opacity-75 group flex items-center px-2 py-2 text-sm font-medium rounded-md"
+                      }
+                      to={menuLink ? menuLink : "/"}
+                      target={item.openNewTab ? "_blank" : "_self"}
+                    >
+                      {menuIcon}
+                      {item.title}
+                    </NavLink>
 
-                  {item.attributes.position === 4 && (
-                    <div className="py-3">
-                      <div className="shrink-0 bg-border h-[1px] w-full"></div>
-                    </div>
-                  )}
-                </Fragment>
-              );
-            })}
+                    {item.position === 4 && (
+                      <div className="py-3">
+                        <div className="shrink-0 bg-border h-[1px] w-full"></div>
+                      </div>
+                    )}
+                  </Fragment>
+                );
+              }
+            )}
           </nav>
         </div>
         <div className="shrink-0 bg-border h-[1px] w-full"></div>

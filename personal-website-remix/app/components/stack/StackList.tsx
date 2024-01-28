@@ -1,7 +1,8 @@
 import { Link } from "@remix-run/react";
-import { strapiImage } from "~/lib/utils";
-import { Button } from "../ui/button";
 import clsx from "clsx";
+import { StackCard } from "../cards";
+import { Button } from "../ui/button";
+import { Stack } from "~/lib/type";
 
 export function StackList({
   stackList,
@@ -27,23 +28,8 @@ export function StackList({
           { "md:grid-cols-2": stackPage }
         )}
       >
-        {stacks?.data?.map((stack: any) => (
-          <div
-            className="flex items-center gap-x-4 p-3 hover:bg-primary/10 rounded-lg"
-            key={stack.id}
-          >
-            <img
-              src={strapiImage(stack?.attributes?.image?.data?.attributes)?.url}
-              alt=""
-              className="w-11 h-11 rounded-md"
-            />
-            <div>
-              <h3 className="font-semibold">{stack.attributes.title}</h3>
-              <p className="text-sm dark:text-[#858585] text-[#717171]">
-                {stack.attributes.description}
-              </p>
-            </div>
-          </div>
+        {stacks?.map((stack: Stack) => (
+          <StackCard key={stack.id} stack={stack} />
         ))}
       </div>
 
