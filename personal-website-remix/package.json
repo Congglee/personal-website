@@ -29,7 +29,6 @@
     "graphql-request": "^6.1.0",
     "isbot": "^3.6.8",
     "lucide-react": "^0.309.0",
-    "markdown-to-jsx": "^7.4.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "remix-themes": "^1.2.2",
